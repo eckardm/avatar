@@ -9,12 +9,12 @@ def coll_info(base_url, repository_id, session_key, unique_resource_id, resource
     endpoint = '/repositories/' + str(repository_id) + '/resources/' + str(unique_resource_id)
     headers = {'X-ArchivesSpace-Session': session_key}
     response = requests.get(base_url + endpoint, headers=headers)
-    print(response.text)
+    print(response)
     
     resource = response.json()
-    
+    '''
     with open(os.path.join('cache', 'resources', unique_resource_id + '.json'), mode='w') as f:
-        json.dump(resource, f)
+        json.dump(resource, f)'''
     
     print('\n- Appending extent')
 
