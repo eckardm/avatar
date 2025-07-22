@@ -4,7 +4,7 @@ import pickle
 import requests
 
 def item_and_item_with_parts(repository_id, base_url, session_key, item, parts, base_preservation_path):
-    
+
     '''
     digfile_calcs = []
     with open(os.path.join('cache', 'digfile_calcs', 'digfile_calcs.p'), mode='rb') as f:

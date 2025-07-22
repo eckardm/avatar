@@ -6,8 +6,10 @@ import requests
 def item_and_item_only(repository_id, base_url, session_key, item, base_preservation_path):
     
     digfile_calcs = []
+
+    '''
     with open(os.path.join('cache', 'digfile_calcs', 'digfile_calcs.p'), mode='rb') as f:
-        digfile_calcs = pickle.load(f)
+        digfile_calcs = pickle.load(f)'''
     
     print('\n- updating the archival object')    
     
@@ -15,7 +17,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
     endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(item['archival_object_id'])
     headers = {'X-ArchivesSpace-Session': session_key}
     response = requests.get(base_url + endpoint, headers=headers)
-    print(response.text)
+    print(response)
     
     archival_object = response.json()
     
@@ -26,8 +28,9 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         'status': 'updated'
     })
     
+    '''
     with open(os.path.join('cache', 'digfile_calcs', item['archival_object_id'] + '.json'), mode='w') as f:
-        json.dump(archival_object, f)
+        json.dump(archival_object, f)'''
     
     title = item['item_title']
     if item['item_part_title']:
@@ -135,7 +138,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
     endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(item['archival_object_id'])
     headers = {'X-ArchivesSpace-Session': session_key}
     response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(archival_object))
-    print(response.text)
+    print(response)
     
     archival_object = response.json()
     archival_object_id = archival_object['id']
@@ -147,7 +150,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.get(base_url + endpoint, headers=headers)
-        print(response.text)
+        print(response)
         
         archival_object = response.json()
         
@@ -185,7 +188,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/digital_objects'
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(proto_digital_object_preservation))
-        print(response.text)
+        print(response)
         
         digital_object_preservation = response.json()
         digital_object_preservation_uri = digital_object_preservation['uri']
@@ -201,7 +204,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.get(base_url + endpoint, headers=headers)
-        print(response.text)
+        print(response)
         
         archival_object = response.json()
         
@@ -216,7 +219,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(archival_object))
-        print(response.text)
+        print(response)
     
     print('- if it exists, creating and linking digital object (access) to the  archival object')
     
@@ -224,7 +227,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
     endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
     headers = {'X-ArchivesSpace-Session': session_key}
     response = requests.get(base_url + endpoint, headers=headers)
-    print(response.text)
+    print(response)
     
     archival_object = response.json()
     
@@ -252,7 +255,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/digital_objects'
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(proto_digital_object_access))
-        print(response.text)
+        print(response)
         
         digital_object_access = response.json()
         digital_object_access_uri = digital_object_access['uri']
@@ -268,7 +271,7 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.get(base_url + endpoint, headers=headers)
-        print(response.text)
+        print(response)
         
         archival_object = response.json()
         
@@ -283,11 +286,13 @@ def item_and_item_only(repository_id, base_url, session_key, item, base_preserva
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
         headers = {'X-ArchivesSpace-Session': session_key}
         response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(archival_object))
-        print(response.text)
+        print(response)
         
     digfile_calcs.append(cache)
+    
+    '''
     with open(os.path.join('cache', 'digfile_calcs', 'digfile_calcs.p'), mode='wb') as f:
-        pickle.dump(digfile_calcs, f)
+        pickle.dump(digfile_calcs, f)'''
     
     return archival_object_id
     
