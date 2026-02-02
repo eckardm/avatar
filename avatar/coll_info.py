@@ -138,7 +138,7 @@ def coll_info(base_url, repository_id, session_key, unique_resource_id, resource
     
     print('  - POSTing resource ' + str(unique_resource_id))
     endpoint = '/repositories/' + str(repository_id) + '/resources/' + str(unique_resource_id)
-    headers = {'X-ArchivesSpace-Session': session_key}
-    response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(resource))
+    headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+    response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(resource).encode('utf-8'))
     print(response.text)
     
