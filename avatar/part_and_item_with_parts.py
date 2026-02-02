@@ -91,8 +91,8 @@ def part_and_item_with_parts(repository_id, base_url, session_key, item, parts, 
     
     print('  - POSTing parent archival object ' + parent_archival_object_id)
     endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(parent_archival_object_id)
-    headers = {'X-ArchivesSpace-Session': session_key}
-    response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(parent_archival_object))
+    headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+    response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(parent_archival_object).encode('utf-8'))
     print(response.text) 
     
     print('- if it does not exist, creating and linking a digital object (preservation) to the parent archival object')
@@ -136,8 +136,8 @@ def part_and_item_with_parts(repository_id, base_url, session_key, item, parts, 
         
         print('  - POSTing digital object (preservation)')
         endpoint = '/repositories/' + str(repository_id) + '/digital_objects'
-        headers = {'X-ArchivesSpace-Session': session_key}
-        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(proto_digital_object_preservation))
+        headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(proto_digital_object_preservation).encode('utf-8'))
         print(response.text)
         
         digital_object_preservation = response.json()
@@ -167,8 +167,8 @@ def part_and_item_with_parts(repository_id, base_url, session_key, item, parts, 
         
         print('  - POSTing parent archival object ' + str(parent_archival_object_id))
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(parent_archival_object_id)
-        headers = {'X-ArchivesSpace-Session': session_key}
-        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(parent_archival_object))
+        headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(parent_archival_object).encode('utf-8'))
         print(response.text)
     
     else:
@@ -267,8 +267,8 @@ def part_and_item_with_parts(repository_id, base_url, session_key, item, parts, 
         
     print('  - POSTing archival object ' + str(item['archival_object_id']))
     endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(item['archival_object_id'])
-    headers = {'X-ArchivesSpace-Session': session_key}
-    response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(archival_object))
+    headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+    response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(archival_object).encode('utf-8'))
     print(response.text)
     
     archival_object = response.json()
@@ -306,8 +306,8 @@ def part_and_item_with_parts(repository_id, base_url, session_key, item, parts, 
         
         print('  - POSTing digital object (access)')
         endpoint = '/repositories/' + str(repository_id) + '/digital_objects'
-        headers = {'X-ArchivesSpace-Session': session_key}
-        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(proto_digital_object_access))
+        headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(proto_digital_object_access).encode('utf-8'))
         print(response.text)
         
         digital_object_access = response.json()
@@ -336,8 +336,8 @@ def part_and_item_with_parts(repository_id, base_url, session_key, item, parts, 
         
         print('  - POSTing child archival object ' + str(archival_object_id))
         endpoint = '/repositories/' + str(repository_id) + '/archival_objects/' + str(archival_object_id)
-        headers = {'X-ArchivesSpace-Session': session_key}
-        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(child_archival_object))
+        headers = {'X-ArchivesSpace-Session': session_key, "Content-Type": "application/json; charset=utf-8"}
+        response = requests.post(base_url + endpoint, headers=headers, data=json.dumps(child_archival_object).encode('utf-8'))
         print(response.text)
         
     digfile_calcs.append(cache)
